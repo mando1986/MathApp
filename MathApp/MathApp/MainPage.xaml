@@ -1,0 +1,47 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MathApp.View.MainPage"
+             
+             xmlns:model="clr-namespace:MathApp.Model"
+             xmlns:viewmodel="clr-namespace:MathApp.ViewModel"
+             x:DataType="viewmodel:ComputationViewModel">
+
+
+    <StackLayout Margin="10,10,10,10">
+        <VerticalStackLayout>
+            <Label Text="Math App"
+                   FontAttributes="Bold"
+                   FontSize="55"
+                   HorizontalTextAlignment="Center"/>
+            <Image
+                VerticalOptions="End"
+                Source="math.png"
+                HeightRequest="185"
+                Aspect="AspectFit" Scale="0.70"/>
+        </VerticalStackLayout>
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding GetComputationCommand}">
+            <ScrollView Background="WhiteSmoke">
+                <CollectionView ItemsSource="{Binding Computations}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Computation">
+                            <Frame BackgroundColor="Honeydew"
+                                   HeightRequest="125">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ComputationViewModel}}, Path=GoToQuestionCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+                                <Label Text="{Binding Pregunta}" FontSize="50"
+                                       HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </RefreshView>
+        <Label Text="Pull down to refresh"
+        HorizontalTextAlignment="Center"
+        Margin="10" FontSize="Medium" TextColor="Black" FontAttributes="Bold"/>
+    </StackLayout>
+</ContentPage>

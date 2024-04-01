@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MathApp.QuestionPage"
+             xmlns:viewmodel="clr-namespace:MathApp.ViewModel"
+             x:DataType="viewmodel:QuestionViewModel"
+             >
+
+        <VerticalStackLayout>
+
+        <VerticalStackLayout WidthRequest="420" Background="LightBlue" Margin="5,0,5,0">
+            <FlexLayout Direction="Row" JustifyContent="Center"
+                        HeightRequest="65" AlignItems="Center">
+            <Label Text="Question "
+                   FontSize="35" FontAttributes="Bold"/>
+            <Label Text="{Binding Computation.Id}"
+            FontSize="35" HorizontalOptions="Center"/>
+            </FlexLayout>
+        </VerticalStackLayout>
+        <VerticalStackLayout HeightRequest="650" Margin="0,0,0,5"
+                             Background="GhostWhite">
+            <Label Text="{Binding Computation.Pregunta}"
+                   Padding="10"
+                   FontSize="40"
+                   HeightRequest="80"
+                   HorizontalTextAlignment="Start"/>
+            <FlexLayout Direction="Column" HeightRequest="260" BackgroundColor="GhostWhite"
+                        JustifyContent="SpaceAround" Margin="5,10,5,10">
+            <RadioButton Content="{Binding Computation.StringList[0]}" />
+            <RadioButton Content="{Binding Computation.StringList[1]}" />
+            <RadioButton Content="{Binding Computation.StringList[2]}" />
+            <RadioButton Content="Skip this question"/>
+            </FlexLayout>
+            <Frame HeightRequest="200" Background="WhiteSmoke" Margin="5,2,5,2">
+                <StackLayout
+                    VerticalOptions="Start">
+                <Label Text="Hint: " FontSize="Large"/>
+                        <BoxView Color="Gray"
+                         HeightRequest="2"
+                         HorizontalOptions="Fill" />
+                <Label Text="{Binding Computation.Hint}" FontSize="Large"/>
+                </StackLayout>
+            </Frame>
+        </VerticalStackLayout>
+        <VerticalStackLayout>
+            <FlexLayout JustifyContent="SpaceEvenly" Direction="Row">
+                <Button Text="Hint Please!"
+                        TextColor="Black"
+                        FontSize="22"
+                        BackgroundColor="IndianRed"
+                       FlexLayout.Grow="1"/>
+                <Button Text="Skip Question"
+                        HeightRequest="50"
+                        TextColor="Black"
+                        FontSize="22"
+                        VerticalOptions="FillAndExpand"
+                        BackgroundColor="Lavender"
+                        FlexLayout.Grow="1"/>
+            </FlexLayout>
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+
+</ContentPage>
